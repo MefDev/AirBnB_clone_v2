@@ -146,7 +146,6 @@ class HBNBCommand(cmd.Cmd):
                             instance_of_type = HBNBCommand.types[key]
                             # cast to the corresponding type
                             mydict[key] = instance_of_type(key_value[1])
-                            print(type(mydict[key]))
 
                         # update the the attribute or add new ones
                         new_instance.__dict__.update({key: mydict[key]})
