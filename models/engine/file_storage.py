@@ -56,6 +56,7 @@ class FileStorage:
             pass
 
     def delete(self, obj=None):
+        """delete a class"""
         if obj is not None:
             k = obj.__class__.__name__ + '.' + obj.id
             if k in self.all():
