@@ -126,32 +126,31 @@ class HBNBCommand(cmd.Cmd):
             elif class_name not in HBNBCommand.classes:
                 print("** class doesn't exist **")
                 return
-            elif class_name in HBNBCommand.classes:
-                # create an instance of the class (copy of the class)
-                new_instance = HBNBCommand.classes[class_name]()
-                # retrieve the arguments without the classname arg
-                key_values = list[1:]
+            # create an instance of the class (copy of the class)
+            new_instance = HBNBCommand.classes[class_name]()
+            # retrieve the arguments without the classname arg
+            key_values = list[1:]
 
-                for parm in key_values:
-                    # split the args using delimiter '='
-                    key_value = parm.split("=")
-                    if (key_value):
-                        mydict = {}
-                        key = key_value[0]
-                        # escape backslash & replace underscore with a space
-                        mydict[key] = key_value[1].replace(
-                            '\"', '').replace('_', ' ')
-                        if (key in HBNBCommand.types):
-                            # create an instance of the type in types
-                            instance_of_type = HBNBCommand.types[key]
-                            # cast to the corresponding type
-                            mydict[key] = instance_of_type(key_value[1])
+            for parm in key_values:
+                # split the args using delimiter '='
+                key_value = parm.split("=")
+                if (key_value):
+                    mydict = {}
+                    key = key_value[0]
+                    # escape backslash & replace underscore with a space
+                    mydict[key] = key_value[1].replace(
+                        '\"', '').replace('_', ' ')
+                    if (key in HBNBCommand.types):
+                        # create an instance of the type in types
+                        instance_of_type = HBNBCommand.types[key]
+                        # cast to the corresponding type
+                        mydict[key] = instance_of_type(key_value[1])
 
-                        # update the the attribute or add new ones
-                        new_instance.__dict__.update({key: mydict[key]})
-                        print(new_instance.id)
-                        storage.save()
-
+                    # update the the attribute or add new ones
+                    new_instance.__dict__.update({key: mydict[key]})
+            storage.new(new_instance)
+            storage.save()
+            print(new_instance.id)
         except ValueError:
             print("You need more args")
 
