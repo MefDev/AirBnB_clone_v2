@@ -1,9 +1,9 @@
-#!/Users/mohamed/.local/share/virtualenvs/venv/bin/python
+#!/usr/bin/python3
 """ Console Module """
 import cmd
 import sys
 from models.base_model import BaseModel
-from models.__init__ import storage, env_storage
+from models.__init__ import storage
 from models.user import User
 from models.place import Place
 from models.state import State
@@ -226,24 +226,21 @@ class HBNBCommand(cmd.Cmd):
         print("[Usage]: destroy <className> <objectId>\n")
 
     def do_all(self, args):
-        """ Shows all objects, or all objects of a class"""
+        """Shows all objects, or all objects of a class"""
         print_list = []
-
         if args:
             args = args.split(' ')[0]  # remove possible trailing args
             if args not in HBNBCommand.classes:
                 print("** class doesn't exist **")
                 return
-            
             else:
-                for k, v in storage._FileStorage__objects.items():
-                    if k.split('.')[0] == args:
-                        print_list.append(str(v))
-        else:
-            for k, v in storage._FileStorage__objects.items():
-                print_list.append(str(v))
+                obj_dict = storage.all(args)
+                for k in obj_dict:
+                    print_list.append(str(obj_dict[k]))
 
-        print(print_list)
+        print("[", end="")
+        print(", ".join(print_list), end="")
+        print("]")
 
     def help_all(self):
         """ Help information for the all command """
