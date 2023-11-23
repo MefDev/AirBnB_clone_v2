@@ -1,10 +1,11 @@
 #!/usr/bin/python3
 """ Review module for the HBNB project """
-from models.base_model import BaseModel
+from models.base_model import BaseModel, Base
 from models import env_storage
-from sqlalchemy import Column, String, Integer, Float, ForeignKey
+from sqlalchemy import Column, String, ForeignKey
 
-class Review(BaseModel):
+
+class Review(BaseModel, Base):
     """ Review classto store review information """
     __tablename__ = "reviews"
     if env_storage == "db":
