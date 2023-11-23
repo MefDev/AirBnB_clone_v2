@@ -30,8 +30,7 @@ class Place(BaseModel, Base):
         reviews = relationship('Review', backref='place',
                                cascade='all, delete-orphan')
         amenities = relationship(
-            'Amenity', secondary='place_amenity',
-            backref='place_amenities', viewonly=False)
+            'Amenity', secondary='place_amenity', viewonly=False)
     else:
         city_id = ""
         user_id = ""
@@ -56,13 +55,13 @@ class Place(BaseModel, Base):
                     review_list.append(review)
             return review_list
 
-        @property
-        def amenities(self):
-            """getter attribute returns the list of amenities instances"""
-            from models.amenity import Amenity
-            amenity_list = []
-            all_amenities = storage.all(Amenity)
-            for amenity in all_amenities.values():
-                if amenity.place_id == self.id:
-                    amenity_list.append(amenity)
-            return amenity_list
+        # @property
+        # def amenities(self):
+        #     """getter attribute returns the list of amenities instances"""
+        #     from models.amenity import Amenity
+        #     amenity_list = []
+        #     all_amenities = storage.all(Amenity)
+        #     for amenity in all_amenities.values():
+        #         if amenity.place_id == self.id:
+        #             amenity_list.append(amenity)
+        #     return amenity_list
