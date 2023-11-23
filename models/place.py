@@ -7,9 +7,12 @@ from sqlalchemy.orm import relationship
 
 place_amenity = Table('place_amenity', Base.metadata,
                       Column('user_id', String(60), ForeignKey(
-                          'places.id'), nullable=False, primary_key=True),
+                          'places.id', onupdate='CASCADE',
+                          ondelete='CASCADE'), nullable=False,
+                          primary_key=True),
                       Column('amenity_id', String(60),
-                             ForeignKey('amenities.id'),
+                             ForeignKey('amenities.id', onupdate='CASCADE',
+                                        ondelete='CASCADE'),
                              nullable=False, primary_key=True))
 
 
