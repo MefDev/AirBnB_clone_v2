@@ -1,14 +1,14 @@
 #!/usr/bin/python3
 """Pack web_static folder to an archive"""
-from fabric.api import *
 
+from fabric.api import *
+import os
 
 env.hosts = 'ubuntu@54.237.23.212', 'ubuntu@54.236.47.5'
 
-
 def do_deploy(archive_path):
     """Deploy to a server"""
-    if archive_path:
+    if os.path.exists(archive_path):
         path = '~/Desktop/AirBnB_clone_v2'
         put(
             local_path='{}/{}'.format(path, archive_path), remote_path='/tmp/')
@@ -31,7 +31,5 @@ def do_deploy(archive_path):
             .format(releases, without_extens))
         print('New version deployed!')
         return True
-
     else:
         return False
-
