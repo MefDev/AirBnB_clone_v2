@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 # setup a web static in the two servers
+
 folder_web_static='/web_static'
 folder_release='releases/'
 folder_shared='shared/'
