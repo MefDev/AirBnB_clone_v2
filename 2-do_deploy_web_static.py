@@ -12,7 +12,7 @@ env.key_filename = '~/.ssh/id_rsa'
 def do_deploy(archive_path):
     """Deploy to a server"""
     if os.path.exists(archive_path):
-        path = '~/Desktop/AirBnB_clone_v2'
+        path = './AirBnB_clone_v2'
         put(
             local_path='{}/{}'.format(path, archive_path), remote_path='/tmp/')
 
