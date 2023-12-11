@@ -29,28 +29,26 @@ def do_pack():
 
 def do_deploy(archive_path):
     """Deploy to a server"""
-    if os.path.exists(archive_path):
-        path = './AirBnB_clone_v2'
-        put(
-            local_path='{}/{}'.format(path, archive_path), remote_path='/tmp/')
+    if not os.path.exists(archive_path):
+        return False
 
-        file_name, file_extension = archive_path.split('.tgz')
-        version, without_extens = file_name.split('/')
-        releases = '/data/web_static/releases'
-        run('sudo mkdir -p {}/{}/'
-            .format(releases, without_extens))
-        run('sudo tar -xzf /tmp/{}.tgz -C {}/{}/'
-            .format(without_extens, releases, without_extens))
-        run('sudo rm /tmp/{}.tgz'
-            .format(without_extens))
-        run('sudo mv {}/{}/web_static/* {}/{}/'
-            .format(releases, without_extens, releases, without_extens))
+    try:
+        file_name = os.path.basename(archive_path)
+        directory_name = file_name.split('.')[0]
+        put(archive_path, '/tmp/{}'.format(file_name))
+        releases_path = '/data/web_static/releases'
+        run('sudo mkdir -p {}/{}'.format(releases_path, directory_name))
+        run('sudo tar -xzf /tmp/{} -C {}/{}'.format(
+            file_name, releases_path, directory_name))
+        run('sudo rm /tmp/{}'.format(file_name))
+        run('sudo mv {}/{}/web_static/* {}/{}/'.format(
+            releases_path, directory_name, releases_path, directory_name))
         run('sudo rm -rf {}/{}/web_static'
-            .format(releases, without_extens))
+            .format(releases_path, directory_name))
         run('sudo rm -rf /data/web_static/current')
         run('sudo ln -s {}/{}/ /data/web_static/current'
-            .format(releases, without_extens))
+            .format(releases_path, directory_name))
         print('New version deployed!')
         return True
-    else:
+    except Exception as e:
         return False
