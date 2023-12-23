@@ -1,6 +1,12 @@
 <center> <h1>HBNB - The Console</h1> </center>
 
-This repository contains the initial stage of a student project to build a clone of the AirBnB website. This stage implements a backend interface, or console, to manage program data. Console commands allow the user to create, update, and destroy objects, as well as manage file storage. Using a system of JSON serialization/deserialization, storage is persistent between sessions.
+This stage implements a backend interface, or console, to manage program data. Console commands allow the user to create, update, and destroy objects, as well as manage file ad DB storage. Using a system of JSON serialization/deserialization, storage is persistent between sessions.
+
+Technologies used:
+- Mysql & Json to manage database independently
+- Flask as a backend framework
+- Fabric to automate deployment process
+- Bash for scripting
 
 ---
 
