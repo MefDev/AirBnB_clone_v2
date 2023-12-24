@@ -16,7 +16,7 @@ def say_hello():
 @app.route("/hbnb", strict_slashes=False)
 def say_hbnb():
     """say HBNB to a user"""
-    return "HBNB!"
+    return "HBNB"
 
 
 if __name__ == "__main__":
