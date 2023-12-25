@@ -2,3 +2,5 @@
 __pycache__
 /versions
 exec.sh
+file.json
+main.py
