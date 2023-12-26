@@ -10,9 +10,10 @@
       <li>{{ state.id }}: <b>{{ state.name }}</b></li>
       <ul>
         {% for city in state.cities|sort(attribute="name") %}
-        <li>{{ city.id }}: <b>{{city.name}}</b></li>
+        <li>{{ city.id }}: <b>{{ city.name }}</b></li>
+        {% endfor %}
       </ul>
-      {% endfor %} {% endfor %}
+      {% endfor %}
     </ul>
   </body>
 </html>
