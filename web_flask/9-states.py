@@ -21,7 +21,6 @@ def display_states():
 def display_state(id):
     """Show a state from the DB"""
     state = storage.all(State).get("State.{}".format(escape(id)))
-    print(state)
     return render_template("9-states.html", state=state, states=None)
 
 
