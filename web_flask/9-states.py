@@ -14,7 +14,7 @@ app = Flask(__name__)
 def display_states():
     """Show the states from the DB"""
     states = storage.all(State).values()
-    return render_template("9-states.html", states=states)
+    return render_template("9-states.html", states=states, state=None)
 
 
 @app.route("/states/<id>", strict_slashes=False)
@@ -22,7 +22,7 @@ def display_state(id):
     """Show a state from the DB"""
     state = storage.all(State).get("State.{}".format(escape(id)))
     print(state)
-    return render_template("9-states.html", state=state)
+    return render_template("9-states.html", state=state, states=None)
 
 
 @app.teardown_appcontext
